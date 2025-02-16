@@ -4,6 +4,7 @@ pipeline {
     tools {
         jdk 'JDK-17'
         maven 'maven3'
+        
 
     }
     
@@ -34,7 +35,7 @@ pipeline {
         }
         stage('SonarQube Analsyis') {
             steps {
-                withSonarQubeEnv('Sonar') {
+                withSonarQubeEnv('sonar') {
                     sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=spring-petclinic -Dsonar.projectKey=spring-petclinic \
                             -Dsonar.java.binaries=. '''
                 }
@@ -59,14 +60,21 @@ pipeline {
         }
         stage('Build & Tag Docker Image') {
             steps {
-                withDockerRegistry(credentialsId: 'docker-cred', url: 'https://hub.docker.com/') {
-                    sh 'docker build -t pratik023/spc_deployment .'
+                withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
+                    sh "docker build -t pratik023/spc_deployment ."
                 }
             }
         }
         stage('Docker Image Scan') {
             steps {
                 sh "trivy image --format table -o trivy-image-report.html pratik023/spc_deployment:latest "
+            }
+        }
+        stage('Push Docker Image To Repository') {
+            steps {
+                withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
+                    sh "docker push pratik023/spc_deployment"
+                }
             }
         }
         
