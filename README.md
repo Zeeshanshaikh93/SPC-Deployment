@@ -1,5 +1,6 @@
 # Spring Pet Clinic - DevOps Pipeline Implementation
-![Image](ProjectData\OverView.jpg)
+![Alt Text](ProjectData/OverView.jpg)
+
 
 **Description**:
 This project implements a CI/CD pipeline using Jenkins for the Spring Pet Clinic application. It includes:
