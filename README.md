@@ -61,7 +61,7 @@ SPC-Deployment/
 ### **Setup & Execution**
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/Pratik-Ahire-git/SPC-Deployment.git
+    git clone https://github.com/Zeeshanshaikh93/SPC-Deployment.git
     cd SPC-Deployment
     ```
 2.  **Configure Jenkins:**
