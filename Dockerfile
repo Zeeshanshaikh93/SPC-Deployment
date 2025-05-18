@@ -2,7 +2,7 @@
 FROM amazoncorretto:17-alpine-jdk
 
 # Add metadata
-LABEL author=""
+LABEL author="Zeeshan"
 
 LABEL project="Spring Pet Clinic"
 

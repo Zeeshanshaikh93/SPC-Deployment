@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Git Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Pratik-Ahire-git/SPC-Deployment.git'
+                git branch: 'main', url: 'https://github.com/Zeeshanshaikh93/SPC-Deployment.git'
             }
         }
         stage('Code Compile') {
@@ -59,19 +59,19 @@ pipeline {
         stage('Build & Tag Docker Image') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
-                    sh "docker build -t pratik023/spc_deployment ."
+                    sh "docker build -t zeeshanshaikh799/spc_deployment ."
                 }
             }
         }
         stage('Docker Image Scan') {
             steps {
-                sh "trivy image --format table -o trivy-image-report.html pratik023/spc_deployment:latest "
+                sh "trivy image --format table -o trivy-image-report.html zeeshanshaikh799/spc_deployment:latest "
             }
         }
         stage('Push Docker Image To Repository') {
             steps {
                 withDockerRegistry(credentialsId: 'docker-cred', url: 'https://index.docker.io/v1/') {
-                    sh "docker push pratik023/spc_deployment"
+                    sh "docker push zeeshanshaikh799/spc_deployment"
                 }
             }
         }
@@ -115,7 +115,7 @@ pipeline {
             emailext (
                 subject: "${jobName} - Build ${buildNumber} - ${pipelineStatus.toUpperCase()}",
                 body: body,
-                to: 'pratikahire.id@gmail.com',
+                to: 'zmr.9841@gmail.com',
                 from: 'jenkins@example.com',
                 replyTo: 'jenkins@example.com',
                 mimeType: 'text/html',
